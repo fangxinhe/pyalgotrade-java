@@ -34,7 +34,7 @@ public class PythonController {
         try {
             BacktestingStrategy strategy = (BacktestingStrategy) pythonService.strToStrategy(command);
             YahooFeed feed = new YahooFeed();
-            feed.`  ("orcl","orcl-2000.csv",null);
+            feed.addBarsFromCSV  ("orcl","./orcl-2000.csv",null);
             strategy.init(null,feed,1000000,null);
             Returns returns = new Returns();
             strategy.attachAnalyzer(returns);

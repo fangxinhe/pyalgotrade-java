@@ -43,7 +43,7 @@ public class YahooFeed extends MemBFBarFeed {
             barList = map.get(instrument);
         } else {
             barList = new ArrayList<>();
-            CSVFileUtil cf = new CSVFileUtil("e:\\orcl-2000.csv");
+            CSVFileUtil cf = new CSVFileUtil(path);
 
             do {
                 Map<String, String> dict = cf.getLineDict();
