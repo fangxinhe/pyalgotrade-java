@@ -1,0 +1,45 @@
+<html>
+<body>
+	<form action="https://8.jrj.com.cn/yqb/fund/group/confirmorder"
+		id="form" method="post" target="_blank">
+		<input name="appid" value="mchb7984d6e78202b16" />
+		<p />
+		<input name="backUrl" value="http://8.jrj.com.cn/" />
+		<p />
+		<input name="nonceStr" value="NyLMZsxkHc" />
+		<p />
+		<input id="prepayId" name="prepayId" value="" />
+		<p />
+		<input name="signType" value="MD5" />
+		<p />
+		<input name="timeStamp" value="1476276675498" />
+		<p />
+		<input name="paySign" value="" id="paySign" />
+		<p />
+
+	</form>
+	<button id="aaa">TEST</button>
+	<script src="https://1.jrj.com.cn/zntg/js/jquery-1.7.min.js"></script>
+	<script>
+		$(function() {
+			$("#aaa").click(function() {
+				$.ajax({
+					type : 'get',
+					url : '/python/run',
+					data : {
+						command : ""
+					},
+					cache : false,
+					success : function(data) {
+						
+
+						$("#form").submit();
+
+					}
+
+				})
+			})
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/index.css" />
+<link rel="stylesheet" href="css/edit.css" />
+<script src="js/jquery/jquery.js"></script>
+<link rel="stylesheet" href="css/pikaday.css" />
+
+
+
+<style type="text/css" media="screen">
+#sourceCode {
+	height: 770px;
+	width: 100%;
+	margin: 0 0 0 0;
+}
+
+.status-bar {
+	position: absolute;
+	bottom: 4px;
+	right: 24px;
+	z-index: 100;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 15px;
+	text-align: center;
+	color: #72cbf9;
+	width: 270px;
+	cursor: move;
+	font-size: 10px;
+	transition: width 0.2s, height 0.2s, color 0.2s;
+	background: rgba(102, 153, 255, 0.25);
+	overflow: hidden;
+}
+
+.status-bar-active {
+	color: #9f6;
+	background: rgba(153, 204, 102, 0.25);
+}
+</style>
+
+
+
+
+<script src="hjs/jquery-1.7.min.js"></script>
+<script src="hjs/kitchen-sink/require.js"></script>
+
+<script src="js/amcharts/amcharts.js" style="text/javascript"></script>
+<script src="js/amcharts/serial.js" style="text/javascript"></script>
+<script src="js/amcharts/amstock.js" style="text/javascript"></script>
+	<script>
+
+
+	</script>
+</head>
+<body>
+	<div class="eidit-container" id="vueArea">
+
+		<div class="edit-container clearfix">
+			<div id="j_leftCon" style="height: 100%"
+				class="edit-container-leftbar">
+				<div class="edit-left-con clearfix">
+					<div class="error-tishi" id="editMessage" style="display: none"></div>
+					<div class="write-eidit">
+
+						<a href="javascript:void(0);" onclick="run()" class="bianyi">运行</a>
+						<div class="tool clearfix">
+							<div class="x-quan" id="x-quan"></div>
+							<div onclick="strategy.openSearch();" class="x-search"></div>
+							<a href="/help" target="_blank" class="xin"></a>
+							<div class="shezhi"></div>
+							<ul style="display: none" class="tool-list">
+								<li id="minFontSize" onclick="strategy.changeFontSize(12);">小号字体</li>
+								<li id="midFontSize" onclick="strategy.changeFontSize(14);"
+									class="col-red">中号字体</li>
+								<li id="maxFontSize" onclick="strategy.changeFontSize(16);"
+									class="add-bottom">大号字体</li>
+								<li id="xcodeTheme" onclick="strategy.changeTheme('xcode');"
+									class="col-red">浅色背景</li>
+								<li id="monokaiTheme" onclick="strategy.changeTheme('monokai');"
+									class="add-bottom">深色背景</li>
+								<li id="defaultKey"
+									onclick="strategy.changeKeyboard('default');" class="col-red">默认</li>
+								<li id="vimKey" onclick="strategy.changeKeyboard('vim');">Vim</li>
+								<li id="emacsKey" onclick="strategy.changeKeyboard('emacs');"
+									class="add-bottom">Emacs</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<pre id="sourceCode" class="path-biao" placeholder="请编写自己的策略"
+					required>class Strategy(BacktestingStrategy):
+    def __init__(self):
+        self.fired = False
+        print "hello h quant "
+    def onBars(self,dateTime,bars):
+        if self.fired is False:
+            self.enterLong("orcl", 100, True,True)
+            self.fired = True;
+
+
+
+					</pre>
+				<div id="j_sidebar" class="edit-left-sidebar"></div>
+				<div class="state-wrap4" style="display: none">
+					<div class="state4"></div>
+					<div class="state4-close"></div>
+				</div>
+
+			</div>
+			<div style="height: 100%" class="edit-container-rightbar">
+
+				<div class="bianji-con">
+					<!--<ul class="bili-list clearfix">-->
+						<!--<li class="clearfix">-->
+							<!--<p class="bili-text">回测收益</p>-->
+							<!--<div class="bl-du">-->
+								<!--<span id="hcsy" class="bl-num">&#45;&#45;</span>-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li class="clearfix">-->
+							<!--<p class="bili-text">回测年化收益</p>-->
+							<!--<div class="bl-du">-->
+								<!--<span id="hcnhsy" class="bl-num">&#45;&#45;</span>-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li class="clearfix">-->
+							<!--<p class="bili-text">基准收益</p>-->
+							<!--<div class="bl-du">-->
+								<!--<span id="jzsy" class="bl-num col-bur-font">&#45;&#45;</span>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+					<div style="width: 100%; height: 280px" id="chartdiv">
+
+					</div>
+				</div>
+				<div class="journal">
+					<ul class="journal-list clearfix">
+						<li id="logTab" class=" add-border-li ">日志</li>
+
+					</ul>
+
+					<div class="journal-detal">
+						<div id="logarea" style="overflow: auto"
+							class="change-box  chang-show ">
+							</div>
+
+					</div>
+				</div>
+				<div class="state-wrap5">
+					<div class="state5"></div>
+					<div class="state5-close"></div>
+				</div>
+				<div class="state-wrap6">
+					<div class="state6"></div>
+					<div class="state6-close"></div>
+				</div>
+
+<!-- 					<form id="payform" action='http://127.0.0.1:9090/api/user/test' method="POST"  target="_blank" >  
+			              <input type="hidden" name="appid" value="123">
+			              <input type="hidden" name="timeStamp" value="123">
+			              <input type="hidden" name="nonceStr" value="123">  
+			              <input type="hidden" name="prepayId" value="123"> 
+			              <input type="hidden" name="backUrl" value=""> 
+			              <input type="hidden" name="signType" value="123"> 
+			              <input type="hidden" name="paySign" value="123">                      
+			        </form> -->
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+	<script>
+		var chartData = [];
+		require.config({
+			paths : {
+				ace : "hjs/ace"
+			}
+		})
+		var editor;
+		define('testace', [ 'ace/ace' ], function(ace, langtools) {
+			editor = ace.edit("sourceCode");
+			editor.setTheme("ace/theme/twilight");
+			editor.session.setMode("ace/mode/python");
+			/* require([ "ace/requirejs/text!ace/ace.js" ], function(e) {
+				editor.setValue(e);
+			}) */
+		});
+		require([ 'testace' ])
+
+		var run = function() {
+			//得代码
+			var sourceCodeBody = editor.getValue();
+			console.log(sourceCodeBody);
+			$.ajax({
+				type : 'get',
+				url : '/python/run',
+				data : {
+					command : sourceCodeBody
+				},
+				cache : false,
+				success : function(ret) {
+
+
+
+					var data = ret.data;
+
+					//$("#logTab").set(ret);
+					console.log(ret);
+					$("#logarea").html(ret.log);
+
+
+					//var payform = document.getElementById("payform");
+					//payform.submit();
+		    		 //$("#payform").submit();
+
+				var firstDate = new Date(data.datas[0].date);
+					console.log(firstDate);
+				chartData=[];
+				for (var i = 0; i < data.datas.length; i++) {
+					chartData.push({
+						date: new Date(data.datas[i].date),
+						value: data.datas[i].value
+					});
+				}
+
+
+				//generateChartData();
+				createStockChart();
+
+			function generateChartData() {
+				var firstDate = new Date(2000, 12, 29);
+				firstDate.setDate(firstDate.getDate() - 500);
+				firstDate.setHours(0, 0, 0, 0);
+				chartData=[];
+				for (var i = 0; i < 500; i++) {
+					var newDate = new Date(firstDate);
+					newDate.setDate(newDate.getDate() + i);
+
+					var value = Math.round(Math.random() * (40 + i)) + 100 + i;
+
+					chartData.push({
+						date: newDate,
+						value: value
+					});
+				}
+			}
+
+
+			function createStockChart() {
+				var chart = new AmCharts.AmStockChart();
+
+
+				// DATASETS //////////////////////////////////////////
+				var dataSet = new AmCharts.DataSet();
+				dataSet.color = "#b0de09";
+				dataSet.fieldMappings = [{
+					fromField: "value",
+					toField: "value"
+				}];
+				dataSet.dataProvider = chartData;
+				dataSet.categoryField = "date";
+
+				chart.dataSets = [dataSet];
+
+				// PANELS ///////////////////////////////////////////
+				var stockPanel = new AmCharts.StockPanel();
+				stockPanel.showCategoryAxis = true;
+				stockPanel.title = "Value";
+				stockPanel.eraseAll = false;
+				//stockPanel.addLabel(0, 100, "Click on the pencil icon on top-right to start drawing", "center", 16);
+
+				var graph = new AmCharts.StockGraph();
+				graph.valueField = "value";
+				graph.bullet = "round";
+				graph.bulletColor = "#FFFFFF";
+				graph.bulletBorderColor = "#00BBCC";
+				graph.bulletBorderAlpha = 1;
+				graph.bulletBorderThickness = 2;
+				graph.bulletSize = 7;
+				graph.lineThickness = 2;
+				graph.lineColor = "#00BBCC";
+				graph.useDataSetColors = false;
+				stockPanel.addStockGraph(graph);
+
+				var stockLegend = new AmCharts.StockLegend();
+				stockLegend.valueTextRegular = " ";
+				stockLegend.markerType = "none";
+				stockPanel.stockLegend = stockLegend;
+				stockPanel.drawingIconsEnabled = true;
+
+				chart.panels = [stockPanel];
+
+
+				// OTHER SETTINGS ////////////////////////////////////
+				var scrollbarSettings = new AmCharts.ChartScrollbarSettings();
+				scrollbarSettings.graph = graph;
+				scrollbarSettings.updateOnReleaseOnly = false;
+				chart.chartScrollbarSettings = scrollbarSettings;
+
+				var cursorSettings = new AmCharts.ChartCursorSettings();
+				cursorSettings.valueBalloonsEnabled = true;
+				chart.chartCursorSettings = cursorSettings;
+
+				var panelsSettings = new AmCharts.PanelsSettings();
+				panelsSettings.creditsPosition = "bottom-right";
+				panelsSettings.marginRight = 16;
+				panelsSettings.marginLeft = 16;
+				chart.panelsSettings = panelsSettings;
+
+
+				// PERIOD SELECTOR ///////////////////////////////////
+				var periodSelector = new AmCharts.PeriodSelector();
+				periodSelector.position = "bottom";
+				periodSelector.periods = [{
+					period: "DD",
+					count: 10,
+					label: "10 days"
+				}, {
+					period: "MM",
+					count: 1,
+					label: "1 month"
+				}, {
+					period: "YYYY",
+					count: 1,
+					label: "1 year"
+				}, {
+					period: "YTD",
+					label: "YTD"
+				}, {
+					period: "MAX",
+					label: "MAX"
+				}];
+				chart.periodSelector = periodSelector;
+
+				chart.write('chartdiv');
+			}
+
+					
+
+				}
+			});
+
+		};
+		var clear = function() {
+			//得代码
+			var sourceCodeBody = $("#sourceCode").html();
+			document.getElementById("sourceCode").value = ""
+			console.log("sourceCodeBody : " + sourceCodeBody);
+			$.ajax({
+				type : 'get',
+				url : '/python/cleanup',
+				data : {
+					command : sourceCodeBody
+				},
+				cache : false,
+				success : function(data) {
+					var html = $("#logarea").val();
+					$("#logarea").html(data);
+
+				}
+			});
+
+		};
+	</script>
+
+
+
+	<!-- Footer Script End-->
+</body>
+</html>

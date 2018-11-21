@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="京东金融综合互联网理财服务，基金理财,金融服务，敬请享受! "/>
+    <meta name="Keywords" content="京东理财,网上理财,基金理财,金融服务,马上有钱,理财规划,个人理财,家庭理财,第三方理财,投资理财/"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <title>京东量化平台</title>
+    <link rel="icon" href="//www.jd.com/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="css/edit.css"/>
+    <script src="js/jquery/jquery.js"></script>
+    <!-- Header CSS Start-->
+    <link rel="stylesheet" href="css/pikaday.css"/>
+    <style type="text/css" media="screen">
+        #sourceCode {
+            height: 770px;
+            width: 100%;
+            margin: 0 0 0 0;
+        }
+
+        .status-bar {
+            position: absolute;
+            bottom: 4px;
+            right: 24px;
+            z-index: 100;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: #72cbf9;
+            width: 270px;
+            cursor: move;
+            font-size: 10px;
+            transition: width 0.2s, height 0.2s, color 0.2s;
+            background: rgba(102, 153, 255, 0.25);
+            overflow: hidden;
+        }
+
+        .status-bar-active {
+            color: #9f6;
+            background: rgba(153, 204, 102, 0.25);
+        }
+    </style>
+
+    <!-- Header CSS Start-->
+    <!--[if IE]>
+    <script type="text/javascript">(function () {
+        var b = ("abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video").split(","), a = b.length;
+        while (a--) {
+            document.createElement(b[a])
+        }
+    })();</script>
+    <![endif]-->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var _jraq = _jraq || [];
+        _jraq.push(['account', 'UA-J2011-12']);
+        (function () {
+            var ja = document.createElement('script');
+            ja.type = 'text/javascript';
+            ja.async = true;
+            ja.src = ('https:' == document.location.protocol ? 'https://jrclick' : 'http://jrclick') + '.jd.com/wl.dev.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ja, s);
+        })();
+    </script>
+    <script type="text/javascript">
+        var jaq = jaq || [];
+        jaq.push(['account', 'UA-J2011-12']);
+        jaq.push(['domain', 'jr.jd.com']);
+        (function () {
+            var ja = document.createElement('script');
+            ja.type = 'text/javascript';
+            ja.async = true;
+            ja.src = ('https:' == document.location.protocol ? 'https://cscssl' : '//csc') + '.jd.com/joya.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ja, s);
+        })();
+    </script>
+</head>
+<body>
+<!--header-->
+<div class="quantification-header">
+    <div class="header-center clearfix">
+        <div class="jd-logo">
+            <a href="https://quant.jd.com" class="li-fir"></a>
+            <a href="https://jr.jd.com" target="_blank" class="li-sec"></a>
+            <div class="j-ron-wrap">
+                <div class="jd-fin jd-opacity"></div>
+                <a href="https://jr.jd.com" target="_blank" class="jd-a">京东金融首页&gt;</a>
+            </div>
+        </div>
+        <ul class="header-center-list clearfix">
+            <li>
+                <a href="/">首页</a>
+            </li>
+            <li>
+                <span class="li-wrap"></span>
+                <a href="/contest/index">竞赛</a>
+            </li>
+            <li>
+                <span class="li-wrap"></span>
+                <a href="/strategy/index">策略</a>
+            </li>
+            <li>
+                <span class="li-wrap"></span>
+                <a href="/research/index">研究</a>
+            </li>
+            <li>
+                <span class="li-wrap"></span>
+                <a href="//club.jr.jd.com/quant/index">社区</a>
+            </li>
+            <li>
+                <span class="li-wrap"></span>
+                <a href="/help">帮助</a>
+            </li>
+        </ul>
+        <div class="user-login">
+            <div class="loginss">
+                <span href="javascript:;" class="login">
+                    <a class="log-name">
+                        <span class="xian-na">diry</span>
+                        <!-- <span class="topica">2</span>-->
+                    </a>
+                    <ul class="log-list">
+                        <li><a class="a-ei" href="//i.jd.com/user/info" target="_blank">账号设置</a></li>
+                        <li><a class="a-ei" href="//club.jr.jd.com/quant/myTopics" target="_blank">个人主页</a></li>
+                        <li><a class="a-ei"
+                               href="//passport.jd.com/uc/login?ltype=logout&ReturnUrl=%2F%2Fquant.jd.com%2F">退出</a>
+                        </li>
+                    </ul>
+                </span>
+                <a href="javascript:;" class="lo-right"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--header end-->
+<!–[if lt IE 10]>
+<script>
+    if ($.browser.msie && parseInt($.browser.version, 10) < 10) { //这里设置版本
+        window.location.href = '/lowBrowser';
+    }
+</script>
+<![endif]–>
+
+<!--z_container-->
+<div class="eidit-container" id="vueArea">
+    <div class="eidit-con-title clearfix">
+        <div class="eidit-main">
+            <ul class="result-list mod-result clearfix">
+                <li class="add-li-col">
+                    <a href="/strategy/edit/24468" class="state">编辑策略</a>
+                </li>
+                <li>
+                    <a href="/run/history/24468" class="state state-end">回测历史</a>
+                </li>
+            </ul>
+        </div>
+        <div class="new-eidit clearfix">
+            <a href="/strategy/index" class="left-return"></a>
+            <input type="text" id="strategyName" maxlength="35" class="eidit-text" value="123"/>
+        </div>
+    </div>
+    <div class="edit-container clearfix">
+        <div id="j_leftCon" style="height: 100%" class="edit-container-leftbar">
+            <div class="edit-left-con clearfix">
+                <div class="error-tishi" id="editMessage" style="display: none"></div>
+                <div class="write-eidit">
+                    <a href="javascript:void(0);" onclick="strategy.copyStrategy()" class="copy">克隆策略</a>
+                    <a href="javascript:void(0);" v-if="canEdit" onclick="strategy.save()" id="strategySaveBtn"
+                       data-disabled="true" class="preservation">保存</a>
+                    <a href="javascript:void(0);" onclick="run()" class="bianyi">运行</a>
+                    <div class="tool clearfix">
+                        <div class="x-quan" id="x-quan"></div>
+                        <div onclick="strategy.openSearch();" class="x-search"></div>
+                        <a href="/help" target="_blank" class="xin"></a>
+                        <div class="shezhi"></div>
+                        <ul style="display: none" class="tool-list">
+                            <li id="minFontSize" onclick="strategy.changeFontSize(12);">小号字体</li>
+                            <li id="midFontSize" onclick="strategy.changeFontSize(14);" class="col-red">中号字体</li>
+                            <li id="maxFontSize" onclick="strategy.changeFontSize(16);" class="add-bottom">大号字体</li>
+                            <li id="xcodeTheme" onclick="strategy.changeTheme('xcode');" class="col-red">浅色背景</li>
+                            <li id="monokaiTheme" onclick="strategy.changeTheme('monokai');" class="add-bottom">深色背景
+                            </li>
+                            <li id="defaultKey" onclick="strategy.changeKeyboard('default');" class="col-red">默认</li>
+                            <li id="vimKey" onclick="strategy.changeKeyboard('vim');">Vim</li>
+                            <li id="emacsKey" onclick="strategy.changeKeyboard('emacs');" class="add-bottom">Emacs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <pre id="sourceCode" class="path-biao" placeholder="请编写自己的策略" required></pre>
+            <textarea id="sourceCode" name="sourceCode" style="display: none">
+1+1</textarea>
+            <div id="j_sidebar" class="edit-left-sidebar"></div>
+            <div class="state-wrap4" style="display: none">
+                <div class="state4"></div>
+                <div class="state4-close"></div>
+            </div>
+            <p class="status-bar" draggable="true" data-enter="快捷键 ctrl + i / cmd + i 开启股票代码搜索功能"
+               data-close="按 'esc' or 'return' 退出搜索模式" style="right: 25px; bottom: 35px;">快捷键 ctrl + i / cmd + i
+                开启股票代码搜索功能</p>
+        </div>
+        <div style="height: 100%" class="edit-container-rightbar">
+            <div class="edit-right-con clearfix">
+                <div class="edi-wraps">
+                    <input id="startDate" name="startDate" class="date" readOnly="readOnly"
+                           type="text" value="2015-01-01"/>
+                    <span class="text">至</span>
+                    <input id="endDate" name="endDate" readOnly="readOnly" class="zhi-dates" type="text"
+                           value="2016-01-01"/>
+                    <div class="dollar">
+                        <span class="do-icon">￥</span>
+                        <input name="principal" id="principal" type="number" step="1000" class="jine"
+                               value="1000000.0000"
+                               maxlength="6"/>
+                    </div>
+                    <div class="second">
+                    <span id="regressionType" name="regressionType" class="sec-text"
+                          data-value="day"> 每天 </span>
+                        <ul style="display: none;" class="date-list">
+                            <li data-value="minute"
+                                onclick="strategy.selectRegressionType(this);">每分
+                            </li>
+                            <li data-value="day"
+                                onclick="strategy.selectRegressionType(this);">每天
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="userPin" value="hefangxin" id="userPin"/>
+                    <input type="hidden" name="strategyId" value="24468" id="strategyId"/>
+                    <input type="hidden" name="languageType" value="python" id="languageType"/>
+                    <input type="hidden" name="requestTime" value="" id="requestTime"/>
+                    <input type="hidden" name="simulationStatus" value="0" id="simulationStatus"/>
+                    <a href="javascript:void(0);" onclick="strategy.backTest()" class="renturn-back">运行回测</a>
+                    <div class="b-jin">
+                        <span class="b-jin-text">编译中...</span>
+                    <span class="b-du">
+                        <span id="compileBar" class="b-j-du" style="width:0%"></span>
+                    </span>
+                        <span id="compileValue" class="num-bi">0%</span>
+                        <a href="javascript:void(0);" onclick="strategy.cancelTest()" class="close-bian">取消编译</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bianji-con">
+                <ul class="bili-list clearfix">
+                    <li class="clearfix">
+                        <p class="bili-text">回测收益</p>
+                        <div class="bl-du">
+                            <span id="hcsy" class="bl-num">--</span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <p class="bili-text">回测年化收益</p>
+                        <div class="bl-du">
+                            <span id="hcnhsy" class="bl-num">--</span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <p class="bili-text">基准收益</p>
+                        <div class="bl-du">
+                            <span id="jzsy" class="bl-num col-bur-font">--</span>
+                        </div>
+                    </li>
+                </ul>
+                <div style="width: 100%; height: 280px" id="backTestChart">
+                    <h2 style="height: 185px; line-height:185px; font-size: 20px; text-align: center;">请编译您的策略</h2>
+                </div>
+            </div>
+            <div class="journal">
+                <ul class="journal-list clearfix">
+                    <li id="logTab" class=" add-border-li ">日志</li>
+                    <li id="errorTab" class="">运行时错误</li>
+                </ul>
+                <div class="jour-down"></div>
+                <div class="journal-detal">
+                    <div id="logarea1" style="overflow: auto" class="change-box  chang-show ">
+
+                    </div>
+                    <div id="errorarea" style="height: 370px" class="change-box ">
+
+                    </div>
+                </div>
+            </div>
+            <div class="state-wrap5">
+                <div class="state5"></div>
+                <div class="state5-close"></div>
+            </div>
+            <div class="state-wrap6">
+                <div class="state6"></div>
+                <div class="state6-close"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="windowmask" style="display: none"></div>
+
+<!-- 策略保存提示提示 -->
+<div id="responseBox" class="panelbox">
+    <div class="panelbg"></div>
+    <div class="panelwrap">
+        <div class="paneltitle">
+            <span class="text">提示信息</span>
+            <span class="panelclose"></span>
+        </div>
+        <div class="panelcon">
+            <div class="max-moni clearfix">
+                <div class="max-wraps">
+                    <span class="max-mean-left"></span>
+                    <span class="max-mea-text" id="message"></span>
+                </div>
+                <div class="qif-btn">
+                    <a href="javascript:void(0);" onclick="strategy.closeMessageBox();" class="sure-delte">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--z_container end-->
+
+
+<script>
+
+    var run = function () {
+        //得代码
+        var sourceCodeBody = $("#sourceCode").val();
+		console.log(sourceCodeBody);
+        $.ajax({
+            type: 'get',
+            url: '/python/run',
+            data: {
+                command:sourceCodeBody
+            },
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                //$("#logTab").set(data);
+            	console.log(data);
+                $("#logarea1").show();
+                $("#logarea1").html(data);
+
+
+            }
+        }); 
+
+
+    };
+
+    (function () {
+        var url = window.location;
+        var element = $('ul.header-center-list a').filter(function () {
+            return this.href == url || (url.href.indexOf(this.href.replace("/index", "")) >= 0 && this.text != "首页") || (url.href.indexOf('strategy') >= 0 && this.href.indexOf('strategy') >= 0);
+        }).parent().addClass('add-state');
+        if (element.is('li')) {
+            element.addClass('add-state');
+        }
+    })();
+</script>
+<script src="js/base.js"></script>
+<!-- Footer Script Start-->
+<script src="js/pikaday/moment.js"></script>
+<script src="js/pikaday/pikaday.js"></script>
+<script src="js/pikaday/pikaday.jquery.js"></script>
+<script src="js/jqueryui/jquery-ui.min.js" charset="UTF-8"></script>
+<script src="js/vue/vue.min.js" charset="UTF-8"></script>
+<script src="js/sockjs/sockjs-1.0.3.js"></script>
+<script src="js/highcharts/highstock.js"></script>
+<script src="js/highcharts/exporting.js"></script>
+<script src="js/common/HighChartsUtil-ee12731a97.min.js"></script>
+<script src="js/ace/ace.js"></script>
+<script src="js/ace/ext-language_tools.js"></script>
+<script src="js/ace/ext-statusbar.js"></script>
+<script src="js/ace/snippets/stocks.js"></script>
+<script src="js/strategy/editStrategy-45ebb37e73.min.js"></script>
+<script src="js/base64/jsbase64.js"></script>
+<script src="js/common/DateFormat-daeab003a3.min.js"></script>
+<script src="js/common/StandardPost-e86c393d53.min.js"></script>
+<script src="js/quantification/eidit.js"></script>
+<script src="js/quantification/qp.js"></script>
+
+
+<!-- Footer Script End-->
+</body>
+</html>
