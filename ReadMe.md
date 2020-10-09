@@ -1,6 +1,6 @@
 **简介**
 
-本项目为 pyagltrade java移植版
+本项目为 pyalgotrade java移植版
 
 优：速度快多线程，可视化
 
